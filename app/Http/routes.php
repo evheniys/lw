@@ -11,11 +11,25 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => 'setlanguage'
+    ],
+    function()
+    {
+        // HomeController
+        Route::get( 'home',  [ 'as' => 'home',   'uses' => 'WelcomeController@Index' ] );
+        Route::get( '/',         [ 'as' => 'home',   'uses' => 'WelcomeController@Index' ] );
+        Route::get( 'about',  [ 'as' => 'about',   'uses' => 'HomeController@getAbout' ] );
 
-Route::get('home', 'HomeController@index');
+        // SettingsController
+        Route::get( 'set-language', [ 'as' => 'set-language', 'uses' => 'SettingsController@setLocale' ] );
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+        // AuthController
+        Route::controllers([
+            'auth'      => 'Auth\AuthController',
+            'password'  => 'Auth\PasswordController',
+        ]);
+    }
+);

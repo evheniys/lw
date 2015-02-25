@@ -1,5 +1,9 @@
 <?php namespace App\Http\Controllers;
 
+use View;
+use LaravelLocalization;
+use Lang;
+
 class WelcomeController extends Controller {
 
 	/*
@@ -21,6 +25,8 @@ class WelcomeController extends Controller {
 	public function __construct()
 	{
 		$this->middleware('guest');
+        View::share( 'locale', Lang::getLocale() );
+        View::share( 'locales', LaravelLocalization::getSupportedLocales() );
 	}
 
 	/**

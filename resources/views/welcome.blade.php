@@ -41,6 +41,21 @@
 				<div class="title">Laravel 5</div>
 				<div class="quote">{{ Inspiring::quote() }}</div>
 			</div>
+
+            @if(!empty( $locales ))
+
+                    <ul class="dropdown-menu" role="menu">
+                        @foreach($locales AS $lc=>$ln)
+                            <li class="@if($locale==$lc) active @endif">
+                                <a href="/{{$lc}}/set-language">
+                                    <i class="fa @if($locale==$lc) fa-check-square-o @else fa-square-o @endif"></i>
+                                    <span class="">{{$ln['native']}}</span>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+
+            @endif
 		</div>
 	</body>
 </html>

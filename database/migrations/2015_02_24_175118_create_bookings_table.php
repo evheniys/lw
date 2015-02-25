@@ -10,23 +10,23 @@ class CreateBookingsTable extends Migration {
 	 *
 	 * @return void
 	 */
-	public function up()
-	{
-		Schema::create('bookings', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->timestamps();
-		});
-	}
+//	public function up()
+//	{
+//		Schema::create('bookings', function(Blueprint $table)
+//		{
+//			$table->increments('id');
+//			$table->timestamps();
+//		});
+//	}
 
 	/**
 	 * Reverse the migrations.
 	 *
 	 * @return void
 	 */
-	public function down()
-	{
-		Schema::drop('bookings');
-	}
+//	public function down()
+//	{
+//		Schema::drop('bookings');
+//	}
 
 }

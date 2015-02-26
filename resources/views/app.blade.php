@@ -19,6 +19,11 @@
 	<![endif]-->
 </head>
 <body>
+@if (Session::has('flash_message'))
+    <div class="alert alert-success">
+        {{ Session::get('flash_message') }}
+    </div>
+@endif
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">

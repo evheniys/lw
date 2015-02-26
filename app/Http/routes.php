@@ -11,6 +11,10 @@
 |
 */
 
+Route::get( 'category/create', 'CategoryController@create');
+Route::post( 'category/create', 'CategoryController@store');
+
+
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -22,6 +26,7 @@ Route::group(
         Route::get( 'home',  [ 'as' => 'home',   'uses' => 'WelcomeController@Index' ] );
         Route::get( '/',         [ 'as' => 'home',   'uses' => 'WelcomeController@Index' ] );
         Route::get( 'about',  [ 'as' => 'about',   'uses' => 'HomeController@getAbout' ] );
+
 
         // SettingsController
         Route::get( 'set-language', [ 'as' => 'set-language', 'uses' => 'SettingsController@setLocale' ] );

@@ -1,9 +1,11 @@
 <?php namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Request;
 
 class CategoryController extends Controller {
 
@@ -25,6 +27,7 @@ class CategoryController extends Controller {
 	public function create()
 	{
 		//
+        return view('category.create');
 	}
 
 	/**
@@ -35,6 +38,11 @@ class CategoryController extends Controller {
 	public function store()
 	{
 		//
+        $input = Request::all();
+        Category::create($input);
+
+        \Session::flash('flash_massage','Категория добавлена');
+        return redirect('category/create');
 	}
 
 	/**

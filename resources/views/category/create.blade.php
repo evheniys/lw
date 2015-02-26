@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layout')
 
 @section('content')
 
@@ -8,7 +8,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Добавить категорию</div>
                     <div class="panel-body">
-                        {!! Form::open() !!}
+                        {!! Form::open(['class'=>'form-horizontal']) !!}
                         <div class="form-group">
                             {!! Form::label('title', 'Название:',['class'=>'col-md-2 control-label']) !!}
                             <div class="col-md-8">

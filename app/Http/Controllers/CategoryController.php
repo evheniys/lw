@@ -46,7 +46,7 @@ class CategoryController extends Controller {
         //Category::create($input);
         Category::create($request->all());
 
-        return redirect('category/create')->with('message','Категория добавлена');
+        return redirect('category')->with('message','Категория добавлена');
 	}
 
 	/**
@@ -85,7 +85,7 @@ class CategoryController extends Controller {
 
         $category = Category::findOrFail($id);
         $category->update($request->all());
-        return redirect('category/create')->withMessage('Категория обновлена');
+        return redirect('category')->withMessage('Категория обновлена');
 	}
 
 	/**
@@ -96,7 +96,8 @@ class CategoryController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+        Category::destroy($id);
+        return redirect('category')->with('message','Категория удалена');
 	}
 
 }

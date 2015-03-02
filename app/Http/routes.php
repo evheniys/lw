@@ -11,8 +11,11 @@
 |
 */
 
-Route::get( 'category/create', 'CategoryController@create');
-Route::post( 'category/create', 'CategoryController@store');
+Route::resource('category', 'CategoryController');
+Route::resource('service', 'ServiceController');
+
+//Route::get( 'category/create', 'CategoryController@create');
+//Route::post( 'category/create', 'CategoryController@store');
 
 
 Route::group(

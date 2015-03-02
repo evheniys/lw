@@ -1,8 +1,9 @@
 <?php namespace App\Http\Controllers;
 
+use App\Service;
 use App\Http\Requests;
+use App\Http\Requests\ServiceRequest;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller {
@@ -24,7 +25,8 @@ class ServiceController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('service.create');
+
 	}
 
 	/**
@@ -32,9 +34,10 @@ class ServiceController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store( ServiceRequest $request )
 	{
-		//
+		Service::create($request->all());
+        return redirect('service')->with('message','Сервис добавлен');
 	}
 
 	/**
@@ -56,7 +59,8 @@ class ServiceController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+        $service = Service::findOrFail($id);
+        return view('service.edit',compact('service'));
 	}
 
 	/**
@@ -65,9 +69,11 @@ class ServiceController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, ServiceRequest $request)
 	{
-		//
+        $service = Service::findOrFail($id);
+        $service->update($request->all());
+        return redirect('service')->withMessage('Сервис обновлен');
 	}
 
 	/**

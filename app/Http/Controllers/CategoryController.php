@@ -2,10 +2,12 @@
 
 use App\Category;
 use App\Http\Requests;
+use App\Http\Requests\CategoryRequest;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Session;
-use Request;
+# use Request;
+
 
 class CategoryController extends Controller {
 
@@ -16,7 +18,8 @@ class CategoryController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$categories = Category::all();
+        return view('category.index',compact('categories'));
 	}
 
 	/**
@@ -27,6 +30,7 @@ class CategoryController extends Controller {
 	public function create()
 	{
 		//
+
         return view('category.create');
 	}
 
@@ -35,14 +39,14 @@ class CategoryController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CategoryRequest $request)
 	{
 		//
-        $input = Request::all();
-        Category::create($input);
+        //$input = Request::all();
+        //Category::create($input);
+        Category::create($request->all());
 
-        \Session::flash('flash_massage','Категория добавлена');
-        return redirect('category/create');
+        return redirect('category/create')->with('message','Категория добавлена');
 	}
 
 	/**
@@ -65,6 +69,8 @@ class CategoryController extends Controller {
 	public function edit($id)
 	{
 		//
+        $category = Category::findOrFail($id);
+        return view('category.edit',compact('category'));
 	}
 
 	/**
@@ -73,9 +79,13 @@ class CategoryController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, CategoryRequest $request)
 	{
 		//
+
+        $category = Category::findOrFail($id);
+        $category->update($request->all());
+        return redirect('category/create')->withMessage('Категория обновлена');
 	}
 
 	/**

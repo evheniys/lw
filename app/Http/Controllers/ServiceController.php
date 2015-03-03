@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Category;
 use App\Service;
 use App\Http\Requests;
 use App\Http\Requests\ServiceRequest;
@@ -26,7 +27,8 @@ class ServiceController extends Controller {
 	 */
 	public function create()
 	{
-		return view('service.create');
+        $categories = Category::lists('title','title');
+        return view('service.create',compact('categories'));
 
 	}
 
@@ -37,7 +39,9 @@ class ServiceController extends Controller {
 	 */
 	public function store( ServiceRequest $request )
 	{
-		Service::create($request->all());
+		$service = Service::create($request->all());
+        $categoriesIds = $request->input('categories');
+        $service->category()->attach($categoriesIds);
         return redirect('service')->with('message','Сервис добавлен');
 	}
 

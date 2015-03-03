@@ -11,7 +11,7 @@ class ServiceRequest extends Request {
 	 */
 	public function authorize()
 	{
-		return false;
+		return true;
 	}
 
 	/**
@@ -21,9 +21,9 @@ class ServiceRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
-			//
-		];
+        return [
+            'title' => 'required'
+        ];
 	}
 
 }

@@ -21,12 +21,9 @@
                         </td>
                         <td>
                             <a class="btn btn-primary pull-left" style="margin-right:1%" href="{{ action('CategoryController@edit', $category->id) }}">Редактировать</a>
-
-
                             {!! Form::open(['method' => 'Delete', 'action' => ['CategoryController@destroy', $category->id]])!!}
                             {!! Form::submit('Удалить',['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
-
                         </td>
                     </tr>
         @endforeach

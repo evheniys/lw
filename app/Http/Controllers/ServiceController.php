@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Requests\ServiceRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ServiceController extends Controller {
 
@@ -27,7 +28,7 @@ class ServiceController extends Controller {
 	 */
 	public function create()
 	{
-        $categories = Category::lists('title','title');
+        $categories = Category::lists('title','id');
         return view('service.create',compact('categories'));
 
 	}
@@ -39,8 +40,28 @@ class ServiceController extends Controller {
 	 */
 	public function store( ServiceRequest $request )
 	{
-		$service = Service::create($request->all());
-        $categoriesIds = $request->input('categories');
+        $filename = "";
+        $extension = "";
+
+        if ($request->hasFile('logo')) {
+            $allowedext = array("png", "jpg", "jpeg");
+            $logof = $request->file('logo');
+            $destinationPath =  'logos';
+            $filename = $logof->getClientOriginalName();
+            $extension = $logof->getClientOriginalExtension();
+            if (in_array($extension, $allowedext)) {
+                $servdata = $request->all();
+                if(!File::exists(public_path().'/'.$destinationPath)) {
+                    if(!File::makeDirectory(public_path().'/'.$destinationPath)) {
+                        abort(503);
+                    }
+                }
+                $upload_success = $request->file('logo')->move(public_path().'/'.$destinationPath, $filename);
+                $servdata['logo'] = $destinationPath.'/'.$upload_success->getFilename();
+            }
+        }
+        $service = Service::create($servdata);
+        $categoriesIds = $request->input('categories_list');
         $service->category()->attach($categoriesIds);
         return redirect('service')->with('message','Сервис добавлен');
 	}
@@ -53,7 +74,7 @@ class ServiceController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+        $service = Service::findOrFail($id);
 	}
 
 	/**
@@ -65,7 +86,8 @@ class ServiceController extends Controller {
 	public function edit($id)
 	{
         $service = Service::findOrFail($id);
-        return view('service.edit',compact('service'));
+        $categories = Category::lists('title','id');
+        return view('service.edit',compact('service','categories'));
 	}
 
 	/**
@@ -77,7 +99,12 @@ class ServiceController extends Controller {
 	public function update($id, ServiceRequest $request)
 	{
         $service = Service::findOrFail($id);
+
         $service->update($request->all());
+
+        $categoriesIds = $request->input('categories_list');
+        $service->category()->sync($categoriesIds);
+
         return redirect('service')->withMessage('Сервис обновлен');
 	}
 

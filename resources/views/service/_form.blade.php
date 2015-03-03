@@ -25,9 +25,9 @@
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('categories', 'Категории:',['class'=>'col-md-2 control-label']) !!}
+    {!! Form::label('categories_list', 'Категории:',['class'=>'col-md-2 control-label']) !!}
     <div class="col-md-8">
-        {!! Form::select('categories[]',$categories,null, ['class' => 'form-control','multiple']) !!}
+        {!! Form::select('categories_list[]',$categories,null, ['class' => 'form-control','multiple']) !!}
     </div>
 </div>
 <div class="form-group">

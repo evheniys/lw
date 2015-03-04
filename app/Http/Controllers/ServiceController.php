@@ -43,14 +43,16 @@ class ServiceController extends Controller {
         $filename = "";
         $extension = "";
 
+        $servdata = $request->all();
+
         if ($request->hasFile('logo')) {
             $allowedext = array("png", "jpg", "jpeg");
             $logof = $request->file('logo');
             $destinationPath =  'logos';
-            $filename = $logof->getClientOriginalName();
+            //$filename = $logof->getClientOriginalName();
             $extension = $logof->getClientOriginalExtension();
+            $filename = $servdata['title'].'_logo.'.$extension;
             if (in_array($extension, $allowedext)) {
-                $servdata = $request->all();
                 if(!File::exists(public_path().'/'.$destinationPath)) {
                     if(!File::makeDirectory(public_path().'/'.$destinationPath)) {
                         abort(503);
@@ -98,10 +100,30 @@ class ServiceController extends Controller {
 	 */
 	public function update($id, ServiceRequest $request)
 	{
+        $filename = "";
+        $extension = "";
+
         $service = Service::findOrFail($id);
-
-        $service->update($request->all());
-
+        $servdata = $request->all();
+        $servdata['logo'] = $service->logo;
+        if ($request->hasFile('logo')) {
+            $allowedext = array("png", "jpg", "jpeg");
+            $logof = $request->file('logo');
+            $destinationPath =  'logos';
+            //$filename = $logof->getClientOriginalName();
+            $extension = $logof->getClientOriginalExtension();
+            $filename = $servdata['title'].'_logo.'.$extension;
+            if (in_array($extension, $allowedext)) {
+                if(!File::exists(public_path().'/'.$destinationPath)) {
+                    if(!File::makeDirectory(public_path().'/'.$destinationPath)) {
+                        abort(503);
+                    }
+                }
+                $upload_success = $request->file('logo')->move(public_path().'/'.$destinationPath, $filename);
+                $servdata['logo'] = $destinationPath.'/'.$upload_success->getFilename();
+            }
+        }
+        $service->update($servdata);
         $categoriesIds = $request->input('categories_list');
         $service->category()->sync($categoriesIds);
 
@@ -116,6 +138,15 @@ class ServiceController extends Controller {
 	 */
 	public function destroy($id)
 	{
+        $service = Service::findOrFail($id);
+        $logofile = $service->logo;
+        if ($logofile != '') {
+            $logofile = public_path().'/'.$logofile;
+            if (File::exists($logofile))
+            {
+                File::delete($logofile);
+            }
+        }
         Service::destroy($id);
         return redirect('service')->withMessage('Сервис удален');
 	}

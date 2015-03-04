@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class BookingRequest extends Request {
+class ReservationRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -11,7 +11,7 @@ class BookingRequest extends Request {
 	 */
 	public function authorize()
 	{
-		return false;
+		return true;
 	}
 
 	/**

@@ -6,10 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'CreateBookingsTable' => $baseDir . '/database/migrations/2015_02_24_175118_create_bookings_table.php',
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2015_02_24_175050_create_categories_table.php',
+    'CreateCortegesTable' => $baseDir . '/database/migrations/2015_03_04_154922_create_corteges_table.php',
+    'CreateCustomersTable' => $baseDir . '/database/migrations/2015_03_04_154929_create_customers_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreateReservationsTable' => $baseDir . '/database/migrations/2015_03_04_154915_create_reservations_table.php',
+    'CreateReservationstatusesTable' => $baseDir . '/database/migrations/2015_03_04_155011_create_reservationstatuses_table.php',
     'CreateServicesTable' => $baseDir . '/database/migrations/2015_02_24_175110_create_services_table.php',
+    'CreateTimetocallsTable' => $baseDir . '/database/migrations/2015_03_04_154942_create_timetocalls_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/File/Iterator.php',

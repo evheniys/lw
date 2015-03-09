@@ -1,0 +1,124 @@
+@font-face {
+    font-family: 'AnastasiaScriptC';
+    src: url('/fonts/AnastasiaScriptC.eot'); /* IE9 Compat Modes */
+    src: url('/fonts/AnastasiaScriptC.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/fonts/AnastasiaScriptC.woff') format('woff'), /* Modern Browsers */
+    url('/fonts/AnastasiaScriptC.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/fonts/AnastasiaScriptC.svg#AnastasiaScriptC') format('svg'); /* Legacy iOS */
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center top;
+    -o-background-size: 100% auto; /* opera ≥ 9.5 */
+    -webkit-background-size: 100% auto; /* Safari ≥ 5.0, Chrome ≥ 4.0 */
+    -khtml-background-size: 100% auto; /* Konqueror ≥ 3.5.4 */
+    -moz-background-size: 100% auto; /* Firefox ≥ 3.6 */
+    background-size: 100% auto; /* браузеры с поддержкой CSS3: FF ≥ 4, Opera ≥ 10.53, IE ≥ 9.0 */
+    background-color: #000000;
+}
+
+#site-header {
+    position: fixed;
+    top: 7px;
+}
+#cont {
+    margin: 150px auto;
+}
+h1#site-title {
+    margin-top: 0;
+}
+#site-title a, #site-description a {
+    color: #fff;
+    display: inline-block;
+    font-family: AnastasiaScriptC;
+    text-shadow: 1px 1px #000;
+}
+
+#site-title a:hover, #site-description a:hover {
+    text-decoration: none;
+}
+#site-title {
+    padding: 0;
+}
+#site-description {
+    margin-top: 0;
+    padding: 0;
+}
+#site-title a {
+    font-size: 70px;
+}
+#site-description a {
+    font-size: 36px;
+}
+
+.btn-order {
+    background-color: transparent;
+    border-color: #fff;
+    color: #fff;
+    float: right;
+}
+
+.btn-order:after {
+    float:none;
+}
+
+.norb {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+}
+
+.norb > input { /* HIDE RADIO */
+    display:none;
+}
+.norb > img {
+    width: 474px;
+    height: 131px;
+}
+.norb > input + img { /* IMAGE STYLES */
+    cursor:pointer;
+    border:2px solid transparent;
+    height: auto;
+}
+.norb > input:checked + img { /* (CHECKED) IMAGE STYLES */
+    border:2px solid #f00;
+}
+
+.norb p {
+    text-align: center;
+}
+
+#orderbutton {
+    position: absolute;
+}
+
+#cortegeSelect {
+    position: absolute;
+    top: -169px;
+}
+#dateSelect {
+    position: absolute;
+    top: 250px;
+    display: none;
+}
+#customerInfo {
+    position: absolute;
+    top: 250px;
+    display: none;
+}
+
+#customerInfo {
+    background-color: rgba(0,0,0,0.6);
+    /* min-width: 693px; */
+}
+
+#customerInfo label, #customerInfo p {
+    color: #fff;
+}
+#customerInfo p {
+    padding: 0 20px;
+}

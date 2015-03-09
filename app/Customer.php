@@ -6,6 +6,10 @@ class Customer extends Model {
 
     protected $table = 'customers';
 
-    protected $fillable = ['name', 'surname', 'phone', 'email'];
+    protected $fillable = ['name', 'phone', 'email'];
 
+    public function reservation()
+    {
+        return $this->hasMany('App\Reservation');
+    }
 }

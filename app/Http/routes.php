@@ -13,7 +13,8 @@
 
 Route::resource('category', 'CategoryController');
 Route::resource('service', 'ServiceController');
-
+Route::get( 'reservation/create', 'ReservationController@create');
+Route::post( 'reservation', 'ReservationController@store');
 //Route::get( 'category/create', 'CategoryController@create');
 //Route::post( 'category/create', 'CategoryController@store');
 

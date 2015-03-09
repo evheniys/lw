@@ -16,7 +16,7 @@ class CreateTimetocallsTable extends Migration {
 		{
 			$table->increments('id');
             $table->string('timeinterval');
-			$table->timestamps();
+            $table->timestamps();
 		});
 	}
 

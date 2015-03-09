@@ -1,8 +1,12 @@
 <?php namespace App\Http\Controllers;
 
+use App\Cortege;
 use App\Http\Requests;
+use App\Http\Requests\ReservationRequest;
 use App\Http\Controllers\Controller;
-
+use App\Reservation;
+use App\ReservationStatus;
+use App\TimeToCall;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller {
@@ -15,6 +19,8 @@ class ReservationController extends Controller {
 	public function index()
 	{
 		//
+        $reservations = Reservation::all();
+        return view('reservations.index',compact('reservations'));
 	}
 
 	/**
@@ -25,6 +31,13 @@ class ReservationController extends Controller {
 	public function create()
 	{
 		//
+        $statuses = ReservationStatus::first();
+        $timetocalles = TimeToCall::lists('timeinterval','id');
+        $corteges = Cortege::all(['cortegename','cortegepic','id']);
+        //print_r(compact('statuses','timetocalles','corteges'));
+        //dd(compact('statuses','timetocalles','corteges'));
+        return view('reservation.create', compact('statuses','timetocalles','corteges'));
+
 	}
 
 	/**
@@ -32,9 +45,11 @@ class ReservationController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store( ReservationRequest $request )
 	{
-		//
+        //return Response::json(['blah' => 'ohhh']);
+        $reservdata = $request->all();
+        dd($reservdata);
 	}
 
 	/**

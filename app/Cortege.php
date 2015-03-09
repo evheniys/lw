@@ -6,6 +6,11 @@ class Cortege extends Model {
 
     protected $table = 'corteges';
 
-    protected $fillable = ['cortegename'];
+    protected $fillable = ['cortegename', 'cortegepic'];
+
+    public function reservation()
+    {
+        return $this->hasMany('App\Reservation');
+    }
 
 }

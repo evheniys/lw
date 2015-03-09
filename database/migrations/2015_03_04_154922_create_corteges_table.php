@@ -16,6 +16,7 @@ class CreateCortegesTable extends Migration {
 		{
 			$table->increments('id');
             $table->string('cortegename');
+            $table->string('cortegepic');
 			$table->timestamps();
 		});
 	}

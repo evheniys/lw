@@ -21,9 +21,16 @@ class ReservationRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
-			//
-		];
+        return [
+            'cortege' => 'required',
+            'bookingdate' => 'required',
+            'customerName' => 'required',
+            'customerPhone' => 'required',
+            'customerEmail' => 'required',
+            'reservation_time_from' => 'required',
+            'reservation_time_till' => 'required',
+            'timetocall'=> 'required'
+        ];
 	}
 
 }

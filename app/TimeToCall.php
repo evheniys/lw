@@ -7,5 +7,9 @@ class TimeToCall extends Model {
     protected $fillable = ['timeinterval'];
 
 	//
+    public function reservation()
+    {
+        return $this->hasMany('App\Reservation');
+    }
 
 }

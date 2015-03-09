@@ -3,9 +3,15 @@
 use Illuminate\Database\Eloquent\Model;
 
 class ReservationStatus extends Model {
-    private $table = 'reservationstatuses';
+    protected $table = 'reservationstatuses';
 
     protected $fillable = ['status'];
 	//
+
+    public function reservation()
+    {
+        return $this->hasMany('App\Reservation');
+    }
+
 
 }
